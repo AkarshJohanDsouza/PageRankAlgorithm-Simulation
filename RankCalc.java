@@ -1,4 +1,5 @@
 import java.util.Scanner;
+//calculates pageRank
 public class RankCalc {
 	static int outLinksCount=0;
 	
