@@ -91,6 +91,6 @@ public static void display(Page[] pages)
 {
 System.out.println();
 for(int i=0;i<pages.length;i++)
-System.out.println(i+"	"+pages[i].getRank()*100);
+System.out.println(i+"	"+pages[i].getRank());
 }
 }
