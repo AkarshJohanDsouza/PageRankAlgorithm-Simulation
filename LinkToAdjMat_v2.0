@@ -1,0 +1,110 @@
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+ 
+public class LinkToAdjMat{
+	private static Document isValidUrl(String url)
+	{
+		try{
+			Document doc1=Jsoup.connect(url).get();
+			return doc1;
+		}
+		catch(Exception e)
+		{
+			System.out.println("Unable TO connect to url:"+url);
+			return null;
+		}
+		
+	}
+	public static int[][] linkToAdjMat(String url, int MAXPAGES) throws IOException{
+		int a[][];		
+		ArrayList<String> pref=new ArrayList<String>();
+		if (isValidUrl(url)!=null)
+		{
+			pref.add(url);
+		
+		}
+		else
+			return null;
+		
+		
+		Elements link1[]=new Elements[100];
+		 
+		for(int d=0;d<pref.size();d++)
+		{
+			String   p   =pref.get(d);
+			
+			Document doc1=isValidUrl(p);
+			if(doc1==null)
+				continue;
+			link1[d]=doc1.select("a[href]");
+			for(int j=0;j<link1[d].size();j++){
+				String uurl = link1[d].get(j).attr("abs:href");
+				if (uurl.length()!=0) {
+					if(pref.indexOf(link1[d].get(j).attr("abs:href"))==-1) {//no duplicates
+						pref.add(link1[d].get(j).attr("abs:href"));
+						if(pref.size()>=MAXPAGES) break;
+					}
+				}
+			}
+			
+			//System.out.println("link1:"+d+" "+link1[d].attr("abs:href"));	
+			if(pref.size()>=MAXPAGES)break;
+		}	
+		
+	/////	
+		System.out.println("----------------------------");
+		for(String p:pref)
+		{
+			System.out.println(":"+p+":");
+		}
+		System.out.println("----------------------------");
+
+		
+		
+	
+		a=new int[pref.size()][pref.size()];
+		
+		Elements link[]=new Elements[pref.size()];
+		
+		for(int i=0;i<pref.size();i++)
+		{
+			Document doc=isValidUrl(pref.get(i));
+			if(doc==null)
+				continue;
+			link[i]=doc.select("a[href]");
+		}		
+		
+
+		for(int i=0;i<pref.size();i++)
+		{	
+			System.out.println("P "+i+": "+pref.get(i));
+			
+			for(int j=0;j<link[i].size();j++)
+			{	
+				
+				System.out.println("		"+link[i].get(j).attr("abs:href"));
+				for(int k=0;k<pref.size();k++){
+					if(link[i].get(j).attr("abs:href").equals(pref.get(k)))
+						a[i][k]=1;
+				}
+			}
+		}
+	
+		
+		for(int i=0;i<pref.size();i++)
+		{
+			for(int j=0;j<pref.size();j++)
+			System.out.format("%d ",a[i][j]);
+			System.out.println();
+			
+		}
+		return a;
+		
+	}
+}
