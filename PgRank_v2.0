@@ -76,10 +76,7 @@ public static void PgRankCalc(Page[] pages)
 public static double calcValue(Page[] inLinkPage,int n)
 {
 	double outLn;
-	//outLn is required to ensure that we dont get a division by zero error 
-	if((double)inLinkPage[n].getOutLinks()==0)
-		outLn=1;
-	else
+	
 		outLn=(double)inLinkPage[n].getOutLinks();
 	
 	if(n==0)
