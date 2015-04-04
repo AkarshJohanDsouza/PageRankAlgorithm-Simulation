@@ -8,7 +8,10 @@ public static void main(String args[]) throws IOException
 int n;
 //n=in.nextInt();
 int mat[][];
-mat=LinkToAdjMat.linkToAdjMat();
+String url1="https://34d939c39b60bc79ad9a3249d408187b2b01a27b-www.googledrive.com/host/0ByTTnOpTV7Eofm0tWV9aenVUd1dBRzk0TGkwaWRqUFJ5YVhMc1hVSkNlaC15LVBtbHdaQ2c/p1.htm";
+String url="https://www.google.com";
+
+mat=LinkToAdjMat.linkToAdjMat(url,4);
 n=mat[0].length;
 /*for(int i=0;i<n;i++)
 {
