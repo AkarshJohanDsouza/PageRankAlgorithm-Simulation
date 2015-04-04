@@ -67,7 +67,7 @@ public static void PgRankCalc(Page[] pages)
 			if(pages[j].getInLinkNum()>0)
 			value1=calcValue(pages[j].getInLinks(),pages[j].getInLinkNum()-1);
 			else
-				value1=1;
+				value1=pages[j].getRank()/(double)pages.length;
 			double value=(1-d)+d*(value1);
 			pages[j].setRank(value);
 		}
