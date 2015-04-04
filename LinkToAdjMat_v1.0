@@ -9,27 +9,27 @@ public class LinkToAdjMat{
 	
 	public static int[][] linkToAdjMat() throws IOException{
  
-		int a[][];
-		//a=new int[3][3];
+		int a[][];		
 		String prefix="https://34d939c39b60bc79ad9a3249d408187b2b01a27b-www.googledrive.com/host/0ByTTnOpTV7Eofm0tWV9aenVUd1dBRzk0TGkwaWRqUFJ5YVhMc1hVSkNlaC15LVBtbHdaQ2c/p";
 		String suffix=".htm";
 		String pref[]=new String[4];
+		
 		for(int i=1;i<=pref.length;i++)
 		{
 			pref[i-1]=prefix+i+suffix;
 		}
 		
+		a=new int[pref.length][pref.length];
 		
 		Document doc[]=new Document[pref.length];
 		Elements link[]=new Elements[pref.length];
+		
 		for(int i=0;i<doc.length;i++)
 		{
 			doc[i]=Jsoup.connect(pref[i]).get();
 			link[i]=doc[i].select("a[href]");
-			//System.out.println("link:"+i+" "+link[i].attr("abs:href"));
-			
-		}
-		a=new int[pref.length][pref.length];
+			//System.out.println("link:"+i+" "+link[i].attr("abs:href"));			
+		}		
 		
 		for(int i=0;i<pref.length;i++)
 		{	
@@ -43,42 +43,9 @@ public class LinkToAdjMat{
 					if(link[i].get(j).attr("abs:href").equals(pref[k]))
 						a[i][k]=1;
 				}
-			}}
-		/*
-		for(Element l: links){
-			System.out.println("link1: " +l.attr("abs:href"));
-			if(l1.equals(l.attr("abs:href")))
-			{a[0][0]=1;}
-			if(l2.equals(l.attr("abs:href")))
-				
-			{a[0][1]=1;}
-			if(l3.equals(l.attr("abs:href")))
-				
-			{a[0][2]=1;}			
-				
+			}
 		}
-		for(Element l: links2){
-			System.out.println("link2: " +l.attr("abs:href"));
-			if(l1.equals(l.attr("abs:href")))
-				
-			{a[1][0]=1;}
-			if(l2.equals(l.attr("abs:href")))
-				
-			{a[1][1]=1;}
-			if(l2.equals(l.attr("abs:href")))
-				
-			{a[1][2]=1;}	
-		}
- 
-		for(Element l: links3){
-			System.out.println("link3: " +l.attr("abs:href"));
-			if(l1==l.attr("abs:href"))
-			{a[2][0]=1;}
-			if(l2==l.attr("abs:href"))
-			{a[2][1]=1;}
-			if(l3==l.attr("abs:href"))
-			{a[2][2]=1;}	
-		}*/
+	
 		
 		for(int i=0;i<pref.length;i++)
 		{
