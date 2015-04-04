@@ -7,7 +7,7 @@ public class Page {
 	private double rank;
 	public Page(int ide,int n)
 	{
-		rank=10;
+		rank=1;
 		inLinksNum=0;
 		inLinks=new Page[100];
 		outLinks=0;
